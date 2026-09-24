@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0a0e27;
+  --color-navy-soft: #141a3d;
+  --color-gold: #ffbd59;
+  --color-gold-dark: #e0a23f;
+  --color-matrix: #00ff88;
+  --color-paper: #f6f7fb;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+}
+
+.ag-prose :where(p, ul, ol) {
+  margin: 0 0 1rem;
+  line-height: 1.7;
+}
+.ag-prose :where(ul, ol) {
+  padding-left: 1.25rem;
+}
+.ag-prose :where(h2, h3) {
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+.ag-prose a {
+  color: var(--color-gold-dark);
+  text-decoration: underline;
+}

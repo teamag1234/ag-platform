@@ -1,0 +1,26 @@
+{
+  "slug": "curso-de-prueba",
+  "title": "Curso de prueba",
+  "description": "Curso de ejemplo para comprobar el aula. Bórralo cuando haya cursos reales.",
+  "thumbnailUrl": null,
+  "published": true,
+  "kajabiCourseId": null,
+  "kajabiOfferIds": [],
+  "modules": [
+    {
+      "title": "Módulo 1: Bienvenida",
+      "description": "Cómo funciona el aula",
+      "lessons": [
+        { "slug": "bienvenida", "title": "Bienvenida al aula", "bunnyVideoId": null, "bodyHtml": "<p>Esta es una lección de texto. Aquí iría el vídeo de Bunny cuando tenga <em>bunnyVideoId</em>.</p>", "attachments": [{ "title": "Guía en PDF", "url": "https://example.com/guia.pdf" }] },
+        { "slug": "como-usar-el-aula", "title": "Cómo usar el aula", "bunnyVideoId": null, "bodyHtml": "<p>Marca cada lección como vista para llevar tu progreso.</p>", "attachments": [] }
+      ]
+    },
+    {
+      "title": "Módulo 2: Primer bloque",
+      "description": null,
+      "lessons": [
+        { "slug": "leccion-con-video", "title": "Lección con vídeo", "bunnyVideoId": "00000000-0000-0000-0000-000000000000", "bodyHtml": null, "attachments": [] }
+      ]
+    }
+  ]
+}
