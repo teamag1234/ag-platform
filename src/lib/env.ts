@@ -12,6 +12,8 @@ const schema = z.object({
   BUNNY_STREAM_API_KEY: z.string().optional(),
   BUNNY_STREAM_TOKEN_KEY: z.string().optional(),
   BUNNY_EMBED_HOST: z.string().default('iframe.mediadelivery.net'),
+  /** Host CDN de la librería (vz-xxxx.b-cdn.net). Si se define, se muestran miniaturas de los vídeos. */
+  BUNNY_STREAM_CDN_HOST: z.string().optional(),
   KAJABI_API_KEY: z.string().optional(),
   KAJABI_CLIENT_ID: z.string().optional(),
   KAJABI_CLIENT_SECRET: z.string().optional(),

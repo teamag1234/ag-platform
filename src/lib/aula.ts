@@ -1,4 +1,4 @@
-import { and, asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, desc, eq, inArray } from 'drizzle-orm';
 import { getDb, schema } from '@/db';
 
 export type LessonRow = typeof schema.lessons.$inferSelect;
@@ -65,4 +65,36 @@ export function flattenLessons(outline: ModuleWithLessons[]) {
 
 export async function markLessonDone(studentId: string, lessonId: string) {
   await getDb().insert(schema.progress).values({ studentId, lessonId }).onConflictDoNothing();
+}
+
+/** Siguiente lección sin completar del curso (o la primera si ya está todo visto). */
+export function nextLesson(outline: ModuleWithLessons[], done: Set<string>) {
+  const all = flattenLessons(outline);
+  return all.find((l) => !done.has(l.id)) ?? all[0] ?? null;
+}
+
+/** Última lección completada por el alumno, con su curso, para "continuar donde lo dejaste". */
+export async function getLastActivity(studentId: string) {
+  const db = getDb();
+  const rows = await db
+    .select({ lesson: schema.lessons, module: schema.modules, course: schema.courses, completedAt: schema.progress.completedAt })
+    .from(schema.progress)
+    .innerJoin(schema.lessons, eq(schema.progress.lessonId, schema.lessons.id))
+    .innerJoin(schema.modules, eq(schema.lessons.moduleId, schema.modules.id))
+    .innerJoin(schema.courses, eq(schema.modules.courseId, schema.courses.id))
+    .innerJoin(schema.grants, and(eq(schema.grants.courseId, schema.courses.id), eq(schema.grants.studentId, studentId)))
+    .where(and(eq(schema.progress.studentId, studentId), eq(schema.grants.status, 'active'), eq(schema.courses.published, true)))
+    .orderBy(desc(schema.progress.completedAt))
+    .limit(1);
+  const last = rows[0];
+  if (!last) return null;
+  const outline = await getCourseOutline(last.course.id);
+  const done = await getProgressSet(studentId, last.course.id);
+  const next = nextLesson(outline, done);
+  const total = outline.reduce((n, m) => n + m.lessons.length, 0);
+  return { course: last.course, next, done: done.size, total };
+}
+
+export function totalDuration(outline: ModuleWithLessons[]) {
+  return outline.reduce((n, m) => n + m.lessons.reduce((a, l) => a + (l.durationSeconds ?? 0), 0), 0);
 }

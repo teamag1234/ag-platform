@@ -76,6 +76,8 @@ export const lessons = pgTable(
     /** Contenido de la lección en HTML. Lo escribimos nosotros, no viene de usuarios. */
     bodyHtml: text('body_html'),
     attachments: jsonb('attachments').$type<Attachment[]>().notNull().default([]),
+    /** Duración del vídeo en segundos (se rellena desde Bunny con npm run bunny:sync). */
+    durationSeconds: integer('duration_seconds'),
     published: boolean('published').notNull().default(true),
     kajabiLessonId: text('kajabi_lesson_id'),
   },

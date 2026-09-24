@@ -11,15 +11,68 @@
       "title": "Módulo 1: Bienvenida",
       "description": "Cómo funciona el aula",
       "lessons": [
-        { "slug": "bienvenida", "title": "Bienvenida al aula", "bunnyVideoId": null, "bodyHtml": "<p>Esta es una lección de texto. Aquí iría el vídeo de Bunny cuando tenga <em>bunnyVideoId</em>.</p>", "attachments": [{ "title": "Guía en PDF", "url": "https://example.com/guia.pdf" }] },
-        { "slug": "como-usar-el-aula", "title": "Cómo usar el aula", "bunnyVideoId": null, "bodyHtml": "<p>Marca cada lección como vista para llevar tu progreso.</p>", "attachments": [] }
+        {
+          "slug": "bienvenida",
+          "title": "Bienvenida al aula",
+          "bunnyVideoId": null,
+          "bodyHtml": "<p>Esta es una lección de texto. Aquí iría el vídeo de Bunny cuando tenga <em>bunnyVideoId</em>.</p>",
+          "attachments": [
+            {
+              "title": "Guía en PDF",
+              "url": "https://example.com/guia.pdf"
+            }
+          ],
+          "durationSeconds": null
+        },
+        {
+          "slug": "como-usar-el-aula",
+          "title": "Cómo usar el aula",
+          "bunnyVideoId": null,
+          "bodyHtml": "<p>Marca cada lección como vista para llevar tu progreso.</p>",
+          "attachments": [],
+          "durationSeconds": null
+        }
       ]
     },
     {
       "title": "Módulo 2: Primer bloque",
       "description": null,
       "lessons": [
-        { "slug": "leccion-con-video", "title": "Lección con vídeo", "bunnyVideoId": "00000000-0000-0000-0000-000000000000", "bodyHtml": null, "attachments": [] }
+        {
+          "slug": "leccion-con-video",
+          "title": "Lección con vídeo",
+          "bunnyVideoId": "00000000-0000-0000-0000-000000000000",
+          "bodyHtml": null,
+          "attachments": [],
+          "durationSeconds": 1140
+        },
+        {
+          "slug": "practica-listening",
+          "title": "Práctica de Listening: parte 1",
+          "bunnyVideoId": "11111111-1111-1111-1111-111111111111",
+          "durationSeconds": 780,
+          "bodyHtml": "<p>Escucha el audio y responde a las preguntas del PDF.</p>",
+          "attachments": [
+            {
+              "title": "Preguntas de práctica (PDF)",
+              "url": "https://example.com/listening-1.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Módulo 3: Simulacro",
+      "description": "Un examen completo con corrección",
+      "lessons": [
+        {
+          "slug": "simulacro-1",
+          "title": "Simulacro 1: Reading y Writing",
+          "bunnyVideoId": "22222222-2222-2222-2222-222222222222",
+          "durationSeconds": 2400,
+          "bodyHtml": null,
+          "attachments": []
+        }
       ]
     }
   ]

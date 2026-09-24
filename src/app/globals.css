@@ -3,35 +3,182 @@
 @theme {
   --color-navy: #0a0e27;
   --color-navy-soft: #141a3d;
+  --color-navy-mid: #1a2a4a;
   --color-gold: #ffbd59;
   --color-gold-dark: #e0a23f;
+  --color-gold-soft: #fff3dc;
   --color-matrix: #00ff88;
-  --color-paper: #f6f7fb;
+  --color-paper: #f7f7f8;
+  --color-ink: #0a0e27;
+  --color-muted: #5b6078;
+  --color-line: #e6e8ef;
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: 0 1px 2px rgba(10, 14, 39, 0.04), 0 8px 24px -12px rgba(10, 14, 39, 0.18);
+  --shadow-lift: 0 2px 4px rgba(10, 14, 39, 0.06), 0 16px 40px -16px rgba(10, 14, 39, 0.28);
+  --radius-card: 20px;
 }
 
 html {
   color-scheme: light;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-paper);
-  color: var(--color-navy);
+  color: var(--color-ink);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
-.ag-prose :where(p, ul, ol) {
+/* Botones */
+.ag-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+.ag-btn:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+.ag-btn-primary {
+  background: linear-gradient(135deg, #ffc86e 0%, #ffbd59 55%, #f0aa3f 100%);
+  color: var(--color-navy);
+  box-shadow: 0 6px 18px -8px rgba(255, 189, 89, 0.9);
+}
+.ag-btn-primary:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(255, 189, 89, 1);
+}
+.ag-btn-dark {
+  background: var(--color-navy);
+  color: #fff;
+}
+.ag-btn-dark:not(:disabled):hover {
+  background: var(--color-navy-mid);
+}
+.ag-btn-ghost {
+  background: transparent;
+  color: var(--color-navy);
+  border: 1.5px solid var(--color-line);
+}
+.ag-btn-ghost:not(:disabled):hover {
+  border-color: var(--color-navy);
+}
+.ag-btn-ghost-light {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+}
+.ag-btn-ghost-light:not(:disabled):hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.ag-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Tarjetas y etiquetas */
+.ag-card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.ag-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ag-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+.ag-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+}
+.ag-eyebrow-light {
+  color: var(--color-gold);
+}
+.ag-hero {
+  background:
+    radial-gradient(900px 400px at 85% -10%, rgba(255, 189, 89, 0.22), transparent 60%),
+    radial-gradient(700px 400px at -10% 110%, rgba(26, 42, 74, 0.9), transparent 60%),
+    linear-gradient(135deg, #0a0e27 0%, #121a3f 60%, #16244d 100%);
+}
+
+/* Contenido de lección */
+.ag-prose {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #232744;
+}
+.ag-prose :where(p, ul, ol, blockquote) {
   margin: 0 0 1rem;
-  line-height: 1.7;
 }
 .ag-prose :where(ul, ol) {
-  padding-left: 1.25rem;
+  padding-left: 1.4rem;
 }
-.ag-prose :where(h2, h3) {
+.ag-prose :where(ul) {
+  list-style: disc;
+}
+.ag-prose :where(ol) {
+  list-style: decimal;
+}
+.ag-prose :where(h2) {
+  font-size: 1.25rem;
   font-weight: 600;
-  margin: 1.5rem 0 0.5rem;
+  margin: 1.75rem 0 0.6rem;
+  color: var(--color-navy);
+}
+.ag-prose :where(h3) {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--color-navy);
 }
 .ag-prose a {
   color: var(--color-gold-dark);
   text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ag-prose strong {
+  color: var(--color-navy);
+}
+.ag-prose img {
+  border-radius: 12px;
+  max-width: 100%;
+}
+.ag-prose blockquote {
+  border-left: 3px solid var(--color-gold);
+  padding-left: 1rem;
+  color: var(--color-muted);
+}
+
+/* Barra lateral de lección */
+.ag-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10, 14, 39, 0.2) transparent;
+}
+details.ag-module > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details.ag-module > summary::-webkit-details-marker {
+  display: none;
+}
+details.ag-module[open] .ag-chevron {
+  transform: rotate(180deg);
+}
+.ag-chevron {
+  transition: transform 0.2s ease;
 }

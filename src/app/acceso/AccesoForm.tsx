@@ -2,18 +2,22 @@
 
 import { useActionState } from 'react';
 import { solicitarAcceso, type AccesoState } from './actions';
+import { IconMail } from '@/components/Icons';
 
 export function AccesoForm() {
   const [state, action, pending] = useActionState<AccesoState, FormData>(solicitarAcceso, { status: 'idle' });
 
   if (state.status === 'sent') {
     return (
-      <div className="rounded-xl border border-gold/60 bg-white p-6">
-        <h2 className="text-lg font-semibold">Revisa tu correo</h2>
-        <p className="mt-2 text-sm text-navy/80">
-          Si <strong>{state.email}</strong> es el email con el que compraste, te hemos enviado un enlace para entrar. Caduca en 20 minutos.
-          Mira también en spam o promociones.
+      <div className="text-center">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gold-soft text-gold-dark">
+          <IconMail width={26} height={26} />
+        </span>
+        <h3 className="mt-4 text-lg font-semibold">Revisa tu correo</h3>
+        <p className="mt-2 text-sm text-muted">
+          Si <strong className="text-navy">{state.email}</strong> es el email con el que compraste, te hemos enviado un enlace para entrar. Caduca en 20 minutos.
         </p>
+        <p className="mt-3 text-xs text-muted">Mira también en spam o promociones.</p>
       </div>
     );
   }
@@ -27,19 +31,16 @@ export function AccesoForm() {
           name="email"
           required
           autoComplete="email"
+          autoFocus
           placeholder="nombre@ejemplo.com"
-          className="mt-1 w-full rounded-lg border border-navy/20 bg-white px-4 py-3 outline-none focus:border-gold focus:ring-2 focus:ring-gold/40"
+          className="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/25"
         />
       </label>
       {state.status === 'error' && <p className="text-sm text-red-600">{state.message}</p>}
-      <button
-        type="submit"
-        disabled={pending}
-        className="w-full rounded-lg bg-gold px-4 py-3 font-semibold text-navy transition hover:bg-gold-dark disabled:opacity-60"
-      >
+      <button type="submit" disabled={pending} className="ag-btn ag-btn-primary w-full">
         {pending ? 'Enviando…' : 'Enviarme el enlace de acceso'}
       </button>
-      <p className="text-xs text-navy/60">Sin contraseñas. Te mandamos un enlace al email con el que compraste el curso.</p>
+      <p className="text-center text-xs text-muted">Sin contraseñas. Te mandamos un enlace de un solo uso.</p>
     </form>
   );
 }

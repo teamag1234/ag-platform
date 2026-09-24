@@ -23,6 +23,21 @@ export function signedEmbedUrl(videoId: string, ttlSeconds = 6 * 60 * 60): strin
   return `${base}?token=${token}&expires=${expires}&autoplay=false`;
 }
 
+/**
+ * Miniatura del vídeo servida desde el CDN de la librería. Si la librería tiene
+ * token de CDN activado, se firma con la fórmula de Bunny CDN:
+ * base64url(SHA256_RAW(token_key + path + expires)).
+ */
+export function thumbnailUrl(videoId: string, ttlSeconds = 24 * 60 * 60): string | null {
+  const { BUNNY_STREAM_CDN_HOST, BUNNY_STREAM_TOKEN_KEY } = env();
+  if (!BUNNY_STREAM_CDN_HOST) return null;
+  const path = `/${videoId}/thumbnail.jpg`;
+  if (!BUNNY_STREAM_TOKEN_KEY) return `https://${BUNNY_STREAM_CDN_HOST}${path}`;
+  const expires = Math.floor(Date.now() / 1000) + ttlSeconds;
+  const token = createHash('sha256').update(`${BUNNY_STREAM_TOKEN_KEY}${path}${expires}`).digest('base64url');
+  return `https://${BUNNY_STREAM_CDN_HOST}${path}?token=${token}&expires=${expires}`;
+}
+
 async function streamRequest<T>(path: string, init: RequestInit): Promise<T> {
   const { libraryId, apiKey } = libraryConfig();
   if (!libraryId || !apiKey) throw new Error('Faltan BUNNY_STREAM_LIBRARY_ID o BUNNY_STREAM_API_KEY');

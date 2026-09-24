@@ -26,6 +26,7 @@ const LessonSchema = z.object({
   bunnyVideoId: z.string().nullable().optional(),
   bodyHtml: z.string().nullable().optional(),
   attachments: z.array(z.object({ title: z.string(), url: z.string().url() })).default([]),
+  durationSeconds: z.number().int().nullable().optional(),
   published: z.boolean().default(true),
   kajabiLessonId: z.string().nullable().optional(),
 });
@@ -88,12 +89,13 @@ run(async () => {
           bunnyVideoId: l.bunnyVideoId ?? null,
           bodyHtml: l.bodyHtml ?? null,
           attachments: l.attachments,
+          durationSeconds: l.durationSeconds ?? null,
           published: l.published,
           kajabiLessonId: l.kajabiLessonId ?? null,
         })
         .onConflictDoUpdate({
           target: [schema.lessons.moduleId, schema.lessons.slug],
-          set: { title: l.title, position: li + 1, bunnyVideoId: l.bunnyVideoId ?? null, bodyHtml: l.bodyHtml ?? null, attachments: l.attachments, published: l.published, kajabiLessonId: l.kajabiLessonId ?? null },
+          set: { title: l.title, position: li + 1, bunnyVideoId: l.bunnyVideoId ?? null, bodyHtml: l.bodyHtml ?? null, attachments: l.attachments, ...(l.durationSeconds !== undefined ? { durationSeconds: l.durationSeconds } : {}), published: l.published, kajabiLessonId: l.kajabiLessonId ?? null },
         });
       lessonsCount++;
     }

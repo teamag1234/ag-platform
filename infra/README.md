@@ -33,6 +33,8 @@ AULA_HOST=aula.agacademyaptis.com
 - Security: **Allowed referrers** = `aula.agacademyaptis.com`. Activar **Block direct URL file access**.
 - API: la API key de la librería va en `BUNNY_STREAM_API_KEY`; el id en `BUNNY_STREAM_LIBRARY_ID`.
 - Encoding: 360p, 720p y 1080p son suficientes.
+- Miniaturas: pon el host CDN de la librería (vz-xxxx.b-cdn.net) en `BUNNY_STREAM_CDN_HOST` y las lecciones mostrarán la imagen del vídeo.
+- Duraciones: `docker compose run --rm jobs npm run bunny:sync` rellena la duración de cada lección desde Bunny y avisa de vídeos aún no codificados.
 
 ## Kajabi
 - Rellenar `KAJABI_API_KEY` (o client id + secret) y un `KAJABI_WEBHOOK_SECRET` largo y aleatorio.
