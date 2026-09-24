@@ -16,7 +16,8 @@
     "bunny:upload": "tsx scripts/bunny-upload.ts",
     "grant": "tsx scripts/grant.ts",
     "kajabi:hooks": "tsx scripts/kajabi-hooks.ts",
-    "bunny:sync": "tsx scripts/bunny-sync.ts"
+    "bunny:sync": "tsx scripts/bunny-sync.ts",
+    "enlace": "tsx scripts/magic-link.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",
