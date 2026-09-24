@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { requireStudent } from '@/lib/auth/session';
+import { Logo } from '@/components/Logo';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,9 +10,9 @@ export default async function AulaLayout({ children }: { children: React.ReactNo
     <div className="min-h-screen">
       <header className="bg-navy text-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-          <Link href="/mis-cursos" className="flex items-baseline gap-2">
-            <span className="text-xs uppercase tracking-[0.3em] text-gold">AG Academy</span>
-            <span className="font-semibold">Aula</span>
+          <Link href="/mis-cursos" className="flex items-center gap-3" aria-label="Mis cursos">
+            <Logo width={120} priority />
+            <span className="hidden border-l border-white/20 pl-3 text-sm text-white/70 sm:inline">Aula</span>
           </Link>
           <div className="flex items-center gap-4 text-sm">
             <span className="hidden text-white/70 sm:inline">{student.name ?? student.email}</span>

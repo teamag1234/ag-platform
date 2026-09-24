@@ -1,13 +1,19 @@
 import { env } from '@/lib/env';
+import { Logo } from '@/components/Logo';
 
 export const dynamic = 'force-dynamic';
 
 export default function EstadoPage() {
   const mensaje = env().ESTADO_MENSAJE;
   return (
-    <main className="mx-auto max-w-2xl px-4 py-12">
-      <p className="text-xs uppercase tracking-[0.3em] text-gold-dark">AG Academy</p>
-      <h1 className="mt-2 text-2xl font-semibold">Estado del servicio</h1>
+    <main>
+      <header className="bg-navy">
+        <div className="mx-auto max-w-2xl px-4 py-5">
+          <Logo width={140} priority />
+        </div>
+      </header>
+      <div className="mx-auto max-w-2xl px-4 py-10">
+      <h1 className="text-2xl font-semibold">Estado del servicio</h1>
 
       {mensaje ? (
         <div className="mt-6 rounded-xl border border-gold bg-white p-5">
@@ -37,6 +43,7 @@ export default function EstadoPage() {
           <a href="/acceso" className="inline-block rounded-lg bg-navy px-4 py-2 font-medium text-white hover:bg-navy-soft">Entrar en el aula</a>
         </p>
       </section>
+      </div>
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getCurrentStudent } from '@/lib/auth/session';
 import { AccesoForm } from './AccesoForm';
+import { Logo } from '@/components/Logo';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,9 +19,9 @@ export default async function AccesoPage({ searchParams }: { searchParams: Promi
   return (
     <main className="flex min-h-screen items-center justify-center bg-navy px-4 py-12">
       <div className="w-full max-w-md">
-        <div className="mb-8 text-center text-white">
-          <p className="text-sm uppercase tracking-[0.3em] text-gold">AG Academy</p>
-          <h1 className="mt-2 text-3xl font-semibold">Entrar en el aula</h1>
+        <div className="mb-8 flex flex-col items-center text-center text-white">
+          <Logo width={220} priority />
+          <h1 className="mt-6 text-2xl font-semibold">Entrar en el aula</h1>
         </div>
         <div className="rounded-2xl bg-paper p-6 shadow-xl">
           {error && <p className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{ERRORS[error] ?? ERRORS.invalid}</p>}

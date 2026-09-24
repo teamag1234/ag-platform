@@ -37,15 +37,21 @@ export async function sendMail(mail: Mail): Promise<void> {
   }
 }
 
+const emailHeader = () =>
+  `<div style="background:#0a0e27;padding:20px 24px;border-radius:12px 12px 0 0;text-align:center"><img src="${env().APP_URL}/logo-ag.png" alt="AG Academy" width="160" style="display:inline-block;height:auto"></div>`;
+
 export async function sendMagicLinkEmail(to: string, url: string) {
   const text = `Hola,\n\nEntra en el aula de AG Academy con este enlace (caduca en 20 minutos):\n${url}\n\nSi no has pedido este acceso, ignora este correo.`;
   const html = `
-    <div style="font-family:Poppins,Arial,sans-serif;max-width:520px;margin:auto;padding:24px;color:#0a0e27">
+    <div style="font-family:Poppins,Arial,sans-serif;max-width:520px;margin:auto;color:#0a0e27">
+      ${emailHeader()}
+      <div style="padding:24px;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 12px 12px">
       <h2 style="margin:0 0 16px">Tu acceso al aula</h2>
       <p>Entra en el aula de AG Academy con este botón. El enlace caduca en 20 minutos.</p>
       <p style="margin:24px 0"><a href="${url}" style="background:#FFBD59;color:#0a0e27;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600">Entrar en el aula</a></p>
       <p style="font-size:13px;color:#555">Si el botón no funciona, copia este enlace:<br>${url}</p>
       <p style="font-size:13px;color:#555">Si no has pedido este acceso, ignora este correo.</p>
+      </div>
     </div>`;
   await sendMail({ to, subject: 'Tu acceso al aula de AG Academy', html, text });
 }
